@@ -1,0 +1,85 @@
+---
+# -------------------------------------------------------------------
+# REQUIRED FIELDS
+# -------------------------------------------------------------------
+name: "First Last"
+school: "School Name"
+position: "QB"          # QB | RB | WR | TE | OL | DL | EDGE | LB | CB | S
+draftYear: 2026
+rank: 1                 # Overall big board rank
+positionalRank: 1       # Rank among players at this position
+grade: 7.5              # Scout grade out of 10.0
+
+# -------------------------------------------------------------------
+# PHYSICAL
+# -------------------------------------------------------------------
+height: "6-2"           # Format: feet-inches e.g. "6-2"
+weight: 220             # In pounds (number, no quotes)
+hometown: "City, ST"
+age: 22
+
+# -------------------------------------------------------------------
+# COMBINE / PRO DAY  (remove lines you don't have data for)
+# -------------------------------------------------------------------
+fortyTime: "4.55"
+tenYardSplit: "1.58"
+vertical: "33.5"
+broadJump: "118"
+threeCone: "7.05"
+shuttle: "4.28"
+armLength: "32 1/4"
+handSize: "9 3/4"
+wingspan: "78 1/2"
+
+# -------------------------------------------------------------------
+# BIO  (one-paragraph string — wrap in double quotes)
+# -------------------------------------------------------------------
+bio: "Player bio goes here. 2–4 sentences covering background, college career arc,
+and what makes this player notable as a prospect."
+
+# -------------------------------------------------------------------
+# STATS  (list of season objects — remove fields that don't apply)
+# Position-specific fields:
+#   QB:   completions, attempts, completionPct, passingYards, passingTDs, interceptions, qbRating
+#         rushAttempts, rushYards, rushTDs
+#   RB:   rushAttempts, rushYards, yardsPerCarry, rushTDs, receptions, receivingYards, receivingTDs, fumbles
+#   WR/TE: targets, receptions, receivingYards, yardsPerReception, receivingTDs, yardsAfterCatch
+#   EDGE/DL: tackles, soloTackles, tacklesForLoss, sacks, qbPressures, forcedFumbles, passDeflections
+#   LB:   tackles, soloTackles, tacklesForLoss, sacks, interceptionsCB, passDeflections
+#   CB/S: tackles, interceptionsCB, passDeflections, targets_allowed, forcedFumbles
+#   OL:   snapsPlayed, allowedSacks, allowedPressures, pressureRate, penaltiesCommitted
+# -------------------------------------------------------------------
+stats:
+  - season: "2024"
+    team: "School Name"
+    gamesPlayed: 12
+    # add position-specific fields below
+  - season: "2023"
+    team: "School Name"
+    gamesPlayed: 13
+---
+
+<!-- ================================================================
+     SCOUTING REPORT
+     Everything below this comment is the written scouting report.
+     Use standard Markdown. Supported: ## headings, **bold**, lists.
+     This renders on the player profile page below the bio and above stats.
+     ================================================================ -->
+
+## Overview
+
+Opening paragraph — overall assessment, comp, draft outlook.
+
+## Strengths
+
+**Trait or skill.** Description of why this trait stands out and what it looks like on film.
+
+**Second strength.** Continue as needed.
+
+## Areas for Development
+
+**Weakness or developmental area.** Keep it specific and honest.
+
+## NFL Projection
+
+One or two sentences on role, timeline, and ceiling.
