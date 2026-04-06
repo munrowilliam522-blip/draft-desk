@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight, TrendingUp, FileText, Users } from 'lucide-react'
 import { getFeaturedProspects } from '@/lib/prospects'
 import { getRecentPosts } from '@/lib/blog'
@@ -15,7 +16,20 @@ export default function HomePage() {
     <>
       {/* Hero — two column on desktop */}
       <section className="relative overflow-hidden border-b border-navy-500">
-        <div className="absolute inset-0 bg-gradient-to-br from-navy-800 via-navy-900 to-navy-950" />
+        {/* Background image */}
+        <div className="absolute inset-0">
+          <Image
+            src="/images/draft-pic.jpeg"
+            alt=""
+            fill
+            className="object-cover object-center"
+            sizes="100vw"
+            priority
+          />
+        </div>
+        {/* Navy shading overlays */}
+        <div className="absolute inset-0 bg-navy-950/80" />
+        <div className="absolute inset-0 bg-gradient-to-br from-navy-900/70 via-navy-900/50 to-transparent" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(79,142,247,0.08),transparent_60%)]" />
         <div className="relative page-container py-16 sm:py-20">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-12 items-start">
