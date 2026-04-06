@@ -76,7 +76,8 @@ export interface Prospect {
   stats: ProspectStat[]
   // MDX body (scouting report)
   content: string
-  imageUrl?: string
+  imageUrl?: string      // headshot — used on profile page and list avatar
+  cardImageUrl?: string  // action/uniform photo — used on homepage featured cards only
 }
 
 export interface BlogPost {

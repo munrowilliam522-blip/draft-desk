@@ -18,12 +18,12 @@ export default function ProspectCard({ prospect, featured = false }: Props) {
       <Link href={href} className="group block card card-hover">
         {/* Image area */}
         <div className="relative h-48 bg-gradient-to-br from-navy-700 to-navy-600 flex items-center justify-center overflow-hidden">
-          {prospect.imageUrl ? (
+          {(prospect.cardImageUrl ?? prospect.imageUrl) ? (
             <Image
-              src={prospect.imageUrl}
+              src={prospect.cardImageUrl ?? prospect.imageUrl!}
               alt={prospect.name}
               fill
-              className="object-cover object-top"
+              className="object-cover object-center"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
             />
           ) : (
