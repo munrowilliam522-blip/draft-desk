@@ -22,9 +22,11 @@ export default function ProspectCard({ prospect, featured = false }: Props) {
             <User size={56} strokeWidth={1} />
           </div>
           {/* Rank badge */}
-          <div className="absolute top-3 left-3 flex h-7 w-7 items-center justify-center rounded-full bg-navy-900/80 border border-navy-400">
-            <span className="text-xs font-bold text-slate-300">#{prospect.rank}</span>
-          </div>
+          {prospect.rank && (
+            <div className="absolute top-3 left-3 flex h-7 w-7 items-center justify-center rounded-full bg-navy-900/80 border border-navy-400">
+              <span className="text-xs font-bold text-slate-300">#{prospect.rank}</span>
+            </div>
+          )}
           {/* Grade */}
           <div className="absolute top-3 right-3 bg-navy-900/80 rounded px-2 py-0.5 border border-navy-400">
             <GradeDisplay grade={prospect.grade} size="sm" />
@@ -52,7 +54,9 @@ export default function ProspectCard({ prospect, featured = false }: Props) {
     <Link href={href} className="group flex items-center gap-4 card card-hover p-4">
       {/* Rank */}
       <div className="w-8 shrink-0 text-center">
-        <span className="text-sm font-bold text-slate-500">#{prospect.rank}</span>
+        <span className="text-sm font-bold text-slate-500">
+          {prospect.rank ? `#${prospect.rank}` : '—'}
+        </span>
       </div>
 
       {/* Avatar placeholder */}
