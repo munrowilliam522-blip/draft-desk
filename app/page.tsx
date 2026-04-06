@@ -19,7 +19,7 @@ export default function HomePage() {
         {/* Background image */}
         <div className="absolute inset-0">
           <Image
-            src="/images/draft-pic.jpeg"
+            src="/images/draft-pic.jpg"
             alt=""
             fill
             className="object-cover object-center"
