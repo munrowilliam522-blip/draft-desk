@@ -24,11 +24,11 @@ export default function HomePage() {
               {CURRENT_YEAR} NFL Draft — Live Coverage
             </span>
             <h1 className="mt-3 text-4xl sm:text-5xl font-black tracking-tight text-white leading-[1.1]">
-              The Scout's Take on Every Prospect
+              Takes on the 2026 NFL Draft
             </h1>
             <p className="mt-4 text-lg text-slate-400 leading-relaxed max-w-xl">
-              In-depth scouting reports, combine data, and prospect grades for every round of the
-              NFL Draft. Straight talk, no filler.
+              In-depth scouting reports, combine data, and prospect grades for every prospect in the
+              NFL Draft.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href={`/prospects/${CURRENT_YEAR}`} className="btn-primary">

@@ -5,7 +5,37 @@ import type { Prospect } from './types'
 
 const CONTENT_DIR = path.join(process.cwd(), 'content', 'prospects')
 
-export function getAllProspects(): Prospect[] {
+/**
+ * Sort prospects by grade within each draft year and assign rank +
+ * positionalRank. Called after every load so ranks are always
+ * derived from grades — never stored in frontmatter.
+ */
+function assignRanks(prospects: Prospect[]): Prospect[] {
+  const byYear = new Map<number, Prospect[]>()
+  for (const p of prospects) {
+    if (!byYear.has(p.draftYear)) byYear.set(p.draftYear, [])
+    byYear.get(p.draftYear)!.push(p)
+  }
+
+  for (const yearProspects of byYear.values()) {
+    yearProspects.sort((a, b) => b.grade - a.grade)
+    yearProspects.forEach((p, i) => {
+      p.rank = i + 1
+    })
+
+    // Positional rank within the same year
+    const posCounter = new Map<string, number>()
+    for (const p of yearProspects) {
+      const next = (posCounter.get(p.position) ?? 0) + 1
+      posCounter.set(p.position, next)
+      p.positionalRank = next
+    }
+  }
+
+  return prospects
+}
+
+function loadAllRaw(): Prospect[] {
   if (!fs.existsSync(CONTENT_DIR)) return []
 
   const prospects: Prospect[] = []
@@ -15,7 +45,9 @@ export function getAllProspects(): Prospect[] {
 
   for (const year of years) {
     const yearDir = path.join(CONTENT_DIR, year)
-    const files = fs.readdirSync(yearDir).filter((f) => f.endsWith('.mdx') && !f.startsWith('_'))
+    const files = fs
+      .readdirSync(yearDir)
+      .filter((f) => f.endsWith('.mdx') && !f.startsWith('_'))
 
     for (const file of files) {
       const slug = file.replace('.mdx', '')
@@ -25,20 +57,27 @@ export function getAllProspects(): Prospect[] {
     }
   }
 
-  return prospects.sort((a, b) => (a.rank ?? 999) - (b.rank ?? 999))
+  return prospects
+}
+
+export function getAllProspects(): Prospect[] {
+  const prospects = loadAllRaw()
+  assignRanks(prospects)
+  // Return sorted by year (newest first) then rank within year
+  return prospects.sort((a, b) =>
+    b.draftYear !== a.draftYear ? b.draftYear - a.draftYear : a.rank - b.rank
+  )
 }
 
 export function getProspectsByYear(year: number): Prospect[] {
+  // Use getAllProspects so ranks are always computed
   return getAllProspects().filter((p) => p.draftYear === year)
 }
 
 export function getProspect(year: string, slug: string): Prospect | null {
-  const filePath = path.join(CONTENT_DIR, year, `${slug}.mdx`)
-  if (!fs.existsSync(filePath)) return null
-
-  const raw = fs.readFileSync(filePath, 'utf-8')
-  const { data, content } = matter(raw)
-  return { ...(data as Omit<Prospect, 'slug' | 'content'>), slug, content }
+  // Load via the ranked list so rank/positionalRank are accurate
+  const yearNum = parseInt(year, 10)
+  return getProspectsByYear(yearNum).find((p) => p.slug === slug) ?? null
 }
 
 export function getAvailableYears(): number[] {
@@ -51,9 +90,9 @@ export function getAvailableYears(): number[] {
 }
 
 export function getFeaturedProspects(limit = 4): Prospect[] {
-  return getAllProspects().slice(0, limit)
+  return getProspectsByYear(2026).slice(0, limit)
 }
 
 export function getRecentProspects(limit = 6): Prospect[] {
-  return getAllProspects().slice(0, limit)
+  return getProspectsByYear(2026).slice(0, limit)
 }
