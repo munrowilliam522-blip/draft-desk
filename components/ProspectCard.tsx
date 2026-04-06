@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { User } from 'lucide-react'
 import type { Prospect } from '@/lib/types'
 import PositionBadge from './PositionBadge'
@@ -15,12 +16,22 @@ export default function ProspectCard({ prospect, featured = false }: Props) {
   if (featured) {
     return (
       <Link href={href} className="group block card card-hover">
-        {/* Image placeholder */}
+        {/* Image area */}
         <div className="relative h-48 bg-gradient-to-br from-navy-700 to-navy-600 flex items-center justify-center overflow-hidden">
+          {prospect.imageUrl ? (
+            <Image
+              src={prospect.imageUrl}
+              alt={prospect.name}
+              fill
+              className="object-cover object-top"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+            />
+          ) : (
+            <div className="flex flex-col items-center text-navy-500">
+              <User size={56} strokeWidth={1} />
+            </div>
+          )}
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-navy-800/80" />
-          <div className="flex flex-col items-center text-navy-500">
-            <User size={56} strokeWidth={1} />
-          </div>
           {/* Rank badge */}
           {prospect.rank && (
             <div className="absolute top-3 left-3 flex h-7 w-7 items-center justify-center rounded-full bg-navy-900/80 border border-navy-400">
@@ -59,9 +70,21 @@ export default function ProspectCard({ prospect, featured = false }: Props) {
         </span>
       </div>
 
-      {/* Avatar placeholder */}
-      <div className="h-10 w-10 shrink-0 rounded-full bg-navy-600 flex items-center justify-center border border-navy-400">
-        <User size={18} className="text-navy-400" />
+      {/* Avatar */}
+      <div className="relative h-10 w-10 shrink-0 rounded-full overflow-hidden bg-navy-600 border border-navy-400">
+        {prospect.imageUrl ? (
+          <Image
+            src={prospect.imageUrl}
+            alt={prospect.name}
+            fill
+            className="object-cover object-top"
+            sizes="40px"
+          />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center">
+            <User size={18} className="text-navy-400" />
+          </div>
+        )}
       </div>
 
       {/* Info */}

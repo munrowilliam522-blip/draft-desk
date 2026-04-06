@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import { ChevronLeft, User, MapPin, Calendar } from 'lucide-react'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import { getProspect, getProspectsByYear, getAvailableYears } from '@/lib/prospects'
@@ -68,9 +69,21 @@ export default async function PlayerPage({ params }: Props) {
         <div className="page-container py-8 sm:py-10">
           <div className="flex flex-col sm:flex-row gap-6 sm:items-start">
             {/* Avatar */}
-            <div className="flex h-24 w-24 shrink-0 items-center justify-center rounded-xl bg-navy-700 border-2 border-navy-500">
-              <User size={40} className="text-navy-400" strokeWidth={1} />
-            </div>
+            {prospect.imageUrl ? (
+              <div className="relative w-24 h-36 shrink-0 rounded-xl overflow-hidden border-2 border-navy-500 bg-navy-700">
+                <Image
+                  src={prospect.imageUrl}
+                  alt={prospect.name}
+                  fill
+                  className="object-cover object-top"
+                  sizes="96px"
+                />
+              </div>
+            ) : (
+              <div className="flex h-24 w-24 shrink-0 items-center justify-center rounded-xl bg-navy-700 border-2 border-navy-500">
+                <User size={40} className="text-navy-400" strokeWidth={1} />
+              </div>
+            )}
 
             {/* Info */}
             <div className="flex-1 min-w-0">

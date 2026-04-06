@@ -76,6 +76,7 @@ export interface Prospect {
   stats: ProspectStat[]
   // MDX body (scouting report)
   content: string
+  imageUrl?: string
 }
 
 export interface BlogPost {
