@@ -13,12 +13,12 @@ function gradeColor(grade: number): string {
 }
 
 function gradeLabel(grade: number): string {
-  if (grade >= 9.0) return 'Elite'
-  if (grade >= 8.0) return 'Top-10'
-  if (grade >= 7.0) return 'First Round'
-  if (grade >= 6.0) return 'Day 2'
-  if (grade >= 5.0) return 'Day 3'
-  return 'Priority FA'
+  if (grade >= 9.0) return 'Top Pick'
+  if (grade >= 8.4) return 'Solid First Round'
+  if (grade >= 7.8) return 'First or Second Round'
+  if (grade >= 7.0) return 'Day 2 Pick'
+  if (grade >= 6.0) return 'Day 3 Pick'
+  return 'Undrafted'
 }
 
 export default function GradeDisplay({ grade, size = 'md', showLabel = false }: Props) {
