@@ -5,11 +5,6 @@ import type { Prospect } from './types'
 
 const CONTENT_DIR = path.join(process.cwd(), 'content', 'prospects')
 
-/**
- * Sort prospects by grade within each draft year and assign rank +
- * positionalRank. Called after every load so ranks are always
- * derived from grades — never stored in frontmatter.
- */
 function assignRanks(prospects: Prospect[]): Prospect[] {
   const byYear = new Map<number, Prospect[]>()
   for (const p of prospects) {
@@ -23,7 +18,6 @@ function assignRanks(prospects: Prospect[]): Prospect[] {
       p.rank = i + 1
     })
 
-    // Positional rank within the same year
     const posCounter = new Map<string, number>()
     for (const p of yearProspects) {
       const next = (posCounter.get(p.position) ?? 0) + 1
@@ -63,19 +57,16 @@ function loadAllRaw(): Prospect[] {
 export function getAllProspects(): Prospect[] {
   const prospects = loadAllRaw()
   assignRanks(prospects)
-  // Return sorted by year (newest first) then rank within year
   return prospects.sort((a, b) =>
     b.draftYear !== a.draftYear ? b.draftYear - a.draftYear : a.rank - b.rank
   )
 }
 
 export function getProspectsByYear(year: number): Prospect[] {
-  // Use getAllProspects so ranks are always computed
   return getAllProspects().filter((p) => p.draftYear === year)
 }
 
 export function getProspect(year: string, slug: string): Prospect | null {
-  // Load via the ranked list so rank/positionalRank are accurate
   const yearNum = parseInt(year, 10)
   return getProspectsByYear(yearNum).find((p) => p.slug === slug) ?? null
 }
@@ -87,12 +78,4 @@ export function getAvailableYears(): number[] {
     .filter((f) => fs.statSync(path.join(CONTENT_DIR, f)).isDirectory())
     .map(Number)
     .sort((a, b) => b - a)
-}
-
-export function getFeaturedProspects(limit = 4): Prospect[] {
-  return getProspectsByYear(2026).slice(0, limit)
-}
-
-export function getRecentProspects(limit = 6): Prospect[] {
-  return getProspectsByYear(2026).slice(0, limit)
 }

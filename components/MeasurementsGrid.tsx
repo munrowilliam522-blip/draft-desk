@@ -12,12 +12,12 @@ interface MeasurementItem {
 }
 
 function fortyTimeColor(time: string | undefined): string {
-  if (!time) return 'text-slate-100'
+  if (!time) return 'text-gray-800'
   const val = parseFloat(time)
-  if (val <= 4.35) return 'text-green-400'
-  if (val <= 4.50) return 'text-accent-blue'
-  if (val <= 4.75) return 'text-accent-gold'
-  return 'text-red-400'
+  if (val <= 4.35) return 'text-green-700'
+  if (val <= 4.50) return 'text-blue-700'
+  if (val <= 4.75) return 'text-yellow-700'
+  return 'text-red-700'
 }
 
 export default function MeasurementsGrid({ prospect }: Props) {
@@ -40,17 +40,14 @@ export default function MeasurementsGrid({ prospect }: Props) {
   return (
     <div>
       <h2 className="section-label mb-4">Measurements &amp; Combine</h2>
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-px bg-navy-500 rounded-lg overflow-hidden border border-navy-500">
+      <div className="grid grid-cols-2 gap-px bg-gray-200 rounded-lg overflow-hidden border border-gray-200">
         {measurements.map((m) => (
-          <div
-            key={m.label}
-            className="bg-navy-800 px-4 py-3 flex flex-col gap-0.5"
-          >
-            <span className="text-xs text-slate-500 font-medium">{m.label}</span>
-            <span className={`text-lg font-bold tabular-nums leading-tight ${m.colorClass ?? 'text-slate-100'}`}>
+          <div key={m.label} className="bg-white px-4 py-3 flex flex-col gap-0.5">
+            <span className="text-xs text-gray-400 font-medium">{m.label}</span>
+            <span className={`text-lg font-bold tabular-nums leading-tight ${m.colorClass ?? 'text-gray-800'}`}>
               {m.value}
               {m.unit && (
-                <span className="text-sm font-medium text-slate-400 ml-0.5">{m.unit}</span>
+                <span className="text-sm font-medium text-gray-400 ml-0.5">{m.unit}</span>
               )}
             </span>
           </div>

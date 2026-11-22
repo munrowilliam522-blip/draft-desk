@@ -1,23 +1,23 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Roboto } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 
-const inter = Inter({
+const roboto = Roboto({
   subsets: ['latin'],
-  variable: '--font-inter',
+  weight: ['400', '500', '700', '900'],
+  variable: '--font-roboto',
   display: 'swap',
 })
 
 export const metadata: Metadata = {
   title: {
-    default: 'DraftDesk — NFL Draft Scouting Reports',
+    default: 'DraftDesk — 2027 NFL Draft Scouting',
     template: '%s | DraftDesk',
   },
-  description:
-    'In-depth NFL Draft scouting reports, prospect grades, combine data, and draft analysis.',
-  keywords: ['NFL Draft', 'scouting report', 'NFL prospects', 'draft grades', 'combine'],
+  description: 'In-depth 2027 NFL Draft scouting reports, prospect grades, and draft analysis.',
+  keywords: ['NFL Draft', 'scouting report', '2027 NFL Draft', 'draft grades', 'prospects'],
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -27,8 +27,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="flex min-h-screen flex-col">
+    <html lang="en" className={roboto.variable}>
+      <body className="flex min-h-screen flex-col bg-white">
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

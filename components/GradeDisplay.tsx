@@ -5,11 +5,11 @@ interface Props {
 }
 
 function gradeColor(grade: number): string {
-  if (grade >= 9.0) return 'text-accent-gold'
-  if (grade >= 8.0) return 'text-green-400'
-  if (grade >= 7.0) return 'text-blue-400'
-  if (grade >= 6.0) return 'text-slate-300'
-  return 'text-slate-500'
+  if (grade >= 9.0) return 'text-maroon-600'
+  if (grade >= 8.0) return 'text-green-700'
+  if (grade >= 7.0) return 'text-blue-700'
+  if (grade >= 6.0) return 'text-gray-600'
+  return 'text-gray-400'
 }
 
 function gradeLabel(grade: number): string {
@@ -35,7 +35,7 @@ export default function GradeDisplay({ grade, size = 'md', showLabel = false }: 
         {grade.toFixed(1)}
       </span>
       {showLabel && (
-        <span className="mt-0.5 text-xs font-medium text-slate-500 uppercase tracking-wide">
+        <span className="mt-0.5 text-xs font-medium text-gray-500 uppercase tracking-wide">
           {gradeLabel(grade)}
         </span>
       )}

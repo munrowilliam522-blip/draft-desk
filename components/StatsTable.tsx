@@ -121,7 +121,6 @@ export default function StatsTable({ prospect }: Props) {
   if (!stats || stats.length === 0) return null
 
   const allColumns = getColumns(position)
-  // Only show columns that have at least one non-null/undefined value
   const activeColumns = allColumns.filter((col) =>
     stats.some((s) => s[col.key] !== undefined && s[col.key] !== null)
   )
@@ -129,15 +128,15 @@ export default function StatsTable({ prospect }: Props) {
   return (
     <div>
       <h2 className="section-label mb-4">Career Statistics</h2>
-      <div className="overflow-x-auto rounded-lg border border-navy-500">
+      <div className="overflow-x-auto rounded-lg border border-gray-200">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-navy-500 bg-navy-700">
+            <tr className="border-b border-gray-200 bg-gray-50">
               {activeColumns.map((col) => (
                 <th
                   key={col.key}
                   className={`stat-cell text-left font-semibold uppercase tracking-wider text-xs whitespace-nowrap ${
-                    col.highlight ? 'text-accent-blue' : 'text-slate-400'
+                    col.highlight ? 'text-maroon-600' : 'text-gray-500'
                   }`}
                 >
                   {col.label}
@@ -149,7 +148,7 @@ export default function StatsTable({ prospect }: Props) {
             {stats.map((row, i) => (
               <tr
                 key={i}
-                className="border-b border-navy-600 last:border-0 hover:bg-navy-700/50 transition-colors"
+                className="border-b border-gray-100 last:border-0 hover:bg-gray-50 transition-colors"
               >
                 {activeColumns.map((col) => {
                   const rawVal = row[col.key]
@@ -165,10 +164,10 @@ export default function StatsTable({ prospect }: Props) {
                       key={col.key}
                       className={`stat-cell whitespace-nowrap ${
                         col.highlight && rawVal !== undefined
-                          ? 'text-slate-100 font-semibold'
-                          : 'text-slate-300'
-                      } ${col.key === 'season' ? 'font-semibold text-accent-blue' : ''} ${
-                        col.key === 'team' ? 'text-slate-400' : ''
+                          ? 'text-gray-900 font-semibold'
+                          : 'text-gray-600'
+                      } ${col.key === 'season' ? 'font-semibold text-maroon-600' : ''} ${
+                        col.key === 'team' ? 'text-gray-400' : ''
                       }`}
                     >
                       {display}
