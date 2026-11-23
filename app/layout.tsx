@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={roboto.variable}>
-      <body className="flex min-h-screen flex-col bg-white">
+      <body className="flex min-h-screen flex-col bg-gray-100">
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
