@@ -29,6 +29,19 @@ export default function GradeDisplay({ grade, size = 'md', showLabel = false }: 
       ? 'text-5xl font-black'
       : 'text-2xl font-black'
 
+  if (grade === 0) {
+    return (
+      <div className="flex flex-col items-center">
+        <span className={`${sizeClass} text-gray-300 tabular-nums leading-none`}>—</span>
+        {showLabel && (
+          <span className="mt-0.5 text-xs font-medium text-gray-400 uppercase tracking-wide">
+            Not graded
+          </span>
+        )}
+      </div>
+    )
+  }
+
   return (
     <div className="flex flex-col items-center">
       <span className={`${sizeClass} ${gradeColor(grade)} tabular-nums leading-none`}>

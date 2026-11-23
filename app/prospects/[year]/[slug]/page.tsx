@@ -104,9 +104,11 @@ export default async function PlayerPage({ params }: Props) {
               <p className="text-xl text-gray-500 font-medium mb-3">{prospect.school}</p>
 
               <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-gray-400">
-                <span>
-                  {prospect.height} &middot; {prospect.weight} lbs
-                </span>
+                {prospect.height && prospect.weight > 0 && (
+                  <span>
+                    {prospect.height} &middot; {prospect.weight} lbs
+                  </span>
+                )}
                 {prospect.hometown && (
                   <span className="flex items-center gap-1">
                     <MapPin size={12} />

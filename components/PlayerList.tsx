@@ -130,8 +130,8 @@ export default function PlayerList({ prospects }: Props) {
 
             {/* Grade */}
             <div className="text-right">
-              <span className="text-2xl font-black text-maroon-600 tabular-nums">
-                {prospect.grade.toFixed(1)}
+              <span className="text-2xl font-black tabular-nums text-maroon-600">
+                {prospect.grade > 0 ? prospect.grade.toFixed(1) : '—'}
               </span>
               <p className="text-xs font-semibold text-gray-300 uppercase tracking-wide mt-0.5 hidden sm:block">
                 grade
