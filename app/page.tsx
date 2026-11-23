@@ -8,18 +8,20 @@ export default function HomePage() {
   const prospects = getProspectsByYear(2027)
 
   return (
-    <div className="page-container py-10">
+    <div className="page-container py-12">
       {/* Page header */}
-      <div className="mb-8 border-b border-gray-200 pb-6">
-        <p className="section-label mb-1">2027 NFL Draft</p>
-        <h1 className="text-3xl font-black text-gray-900 tracking-tight">Big Board</h1>
-        <p className="mt-2 text-sm text-gray-500">
+      <div className="mb-10 border-b border-gray-200 pb-8">
+        <p className="section-label mb-2">2027 NFL Draft</p>
+        <h1 className="text-5xl sm:text-6xl font-black text-gray-900 tracking-tight leading-none">
+          Big Board
+        </h1>
+        <p className="mt-3 text-base text-gray-400">
           {prospects.length} prospect{prospects.length !== 1 ? 's' : ''} ranked
         </p>
       </div>
 
       {/* Column headers */}
-      <div className="hidden sm:grid grid-cols-[40px_64px_1fr_100px_80px] gap-4 px-4 pb-2 text-xs font-semibold uppercase tracking-widest text-gray-400">
+      <div className="hidden sm:grid grid-cols-[48px_72px_1fr_110px_90px] gap-4 px-5 pb-3 text-xs font-bold uppercase tracking-widest text-gray-400">
         <span>#</span>
         <span></span>
         <span>Player</span>
@@ -28,35 +30,35 @@ export default function HomePage() {
       </div>
 
       {/* Player list */}
-      <div className="divide-y divide-gray-100 border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+      <div className="divide-y divide-gray-100 border border-gray-200 rounded-2xl overflow-hidden shadow-md">
         {prospects.length === 0 && (
-          <div className="py-16 text-center text-gray-400 text-sm">
+          <div className="py-20 text-center text-gray-400 text-base">
             No prospects added yet.
           </div>
         )}
         {prospects.map((prospect) => (
           <div
             key={prospect.slug}
-            className="grid grid-cols-[40px_64px_1fr_auto] sm:grid-cols-[40px_64px_1fr_100px_80px] gap-4 items-center px-4 py-4 bg-white hover:bg-gray-50 transition-colors"
+            className="grid grid-cols-[48px_72px_1fr_auto] sm:grid-cols-[48px_72px_1fr_110px_90px] gap-4 items-center px-5 py-5 bg-white hover:bg-maroon-50 transition-colors group"
           >
             {/* Rank */}
-            <span className="text-sm font-bold text-gray-300 tabular-nums">
+            <span className="text-xl font-black text-gray-200 tabular-nums group-hover:text-maroon-300 transition-colors">
               {prospect.rank}
             </span>
 
             {/* Photo */}
-            <div className="relative w-12 h-16 shrink-0 rounded-md overflow-hidden bg-gray-100 border border-gray-200">
+            <div className="relative w-14 h-20 shrink-0 rounded-lg overflow-hidden bg-gray-100 border border-gray-200">
               {prospect.imageUrl ? (
                 <Image
                   src={prospect.imageUrl}
                   alt={prospect.name}
                   fill
                   className="object-cover object-top"
-                  sizes="48px"
+                  sizes="56px"
                 />
               ) : (
                 <div className="flex h-full w-full items-center justify-center">
-                  <User size={22} className="text-gray-300" />
+                  <User size={26} className="text-gray-300" />
                 </div>
               )}
             </div>
@@ -65,24 +67,24 @@ export default function HomePage() {
             <div className="min-w-0">
               <Link
                 href={`/prospects/2027/${prospect.slug}`}
-                className="text-base font-bold text-maroon-600 hover:text-maroon-700 hover:underline leading-tight block truncate"
+                className="text-xl font-black text-gray-900 hover:text-maroon-600 transition-colors leading-tight block truncate"
               >
                 {prospect.name}
               </Link>
-              <p className="text-sm text-gray-500 mt-0.5 truncate">{prospect.school}</p>
+              <p className="text-sm font-medium text-gray-400 mt-1 truncate">{prospect.school}</p>
             </div>
 
             {/* Position */}
             <div className="hidden sm:flex justify-start">
-              <PositionBadge position={prospect.position} size="sm" />
+              <PositionBadge position={prospect.position} size="md" />
             </div>
 
             {/* Grade */}
             <div className="text-right">
-              <span className="text-lg font-black text-maroon-600 tabular-nums">
+              <span className="text-2xl font-black text-maroon-600 tabular-nums">
                 {prospect.grade.toFixed(1)}
               </span>
-              <p className="text-xs text-gray-400 hidden sm:block">grade</p>
+              <p className="text-xs font-semibold text-gray-300 uppercase tracking-wide mt-0.5 hidden sm:block">grade</p>
             </div>
           </div>
         ))}
