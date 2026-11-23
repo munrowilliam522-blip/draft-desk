@@ -7,34 +7,45 @@ import { User, ArrowUpDown, ChevronUp, ChevronDown } from 'lucide-react'
 import type { Prospect } from '@/lib/types'
 import PositionBadge from '@/components/PositionBadge'
 
-type SortMode = 'grade' | 'position'
+type SortMode = 'grade-desc' | 'grade-asc' | 'position'
 
 interface Props {
   prospects: Prospect[]
 }
 
 export default function PlayerList({ prospects }: Props) {
-  const [sortMode, setSortMode] = useState<SortMode>('grade')
+  const [sortMode, setSortMode] = useState<SortMode>('grade-desc')
 
   const sorted = [...prospects].sort((a, b) => {
     if (sortMode === 'position') {
       const posCmp = a.position.localeCompare(b.position)
       if (posCmp !== 0) return posCmp
-      return b.grade - a.grade   // secondary: best grade first within position
+      return b.grade - a.grade
     }
-    return a.rank - b.rank       // default: by rank (grade desc)
+    if (sortMode === 'grade-asc') return a.grade - b.grade
+    return b.grade - a.grade  // grade-desc default
   })
 
-  const toggleSort = (col: SortMode) => {
-    setSortMode((prev) => (prev === col ? 'grade' : col))
+  const handleGradeClick = () => {
+    setSortMode((prev) => (prev === 'grade-desc' ? 'grade-asc' : 'grade-desc'))
   }
 
-  const SortIcon = ({ col }: { col: SortMode }) => {
-    if (sortMode !== col) return <ArrowUpDown size={12} className="opacity-40" />
-    return col === 'position'
-      ? <ChevronUp size={12} className="text-maroon-600" />
-      : <ChevronDown size={12} className="text-maroon-600" />
+  const handlePositionClick = () => {
+    setSortMode((prev) => (prev === 'position' ? 'grade-desc' : 'position'))
   }
+
+  const GradeIcon = () => {
+    if (sortMode === 'grade-desc') return <ChevronDown size={12} className="text-maroon-600" />
+    if (sortMode === 'grade-asc') return <ChevronUp size={12} className="text-maroon-600" />
+    return <ArrowUpDown size={12} className="opacity-40" />
+  }
+
+  const PositionIcon = () => {
+    if (sortMode === 'position') return <ChevronUp size={12} className="text-maroon-600" />
+    return <ArrowUpDown size={12} className="opacity-40" />
+  }
+
+  const gradeActive = sortMode === 'grade-desc' || sortMode === 'grade-asc'
 
   return (
     <>
@@ -46,24 +57,24 @@ export default function PlayerList({ prospects }: Props) {
 
         {/* Position — clickable sort */}
         <button
-          onClick={() => toggleSort('position')}
+          onClick={handlePositionClick}
           className={`flex items-center gap-1 hover:text-maroon-600 transition-colors ${
             sortMode === 'position' ? 'text-maroon-600' : ''
           }`}
         >
           Position
-          <SortIcon col="position" />
+          <PositionIcon />
         </button>
 
-        {/* Grade — clickable sort */}
+        {/* Grade — clickable sort, toggles high→low / low→high */}
         <button
-          onClick={() => toggleSort('grade')}
+          onClick={handleGradeClick}
           className={`flex items-center gap-1 justify-end w-full hover:text-maroon-600 transition-colors ${
-            sortMode === 'grade' ? 'text-maroon-600' : ''
+            gradeActive ? 'text-maroon-600' : ''
           }`}
         >
           Grade
-          <SortIcon col="grade" />
+          <GradeIcon />
         </button>
       </div>
 
