@@ -29,7 +29,7 @@ export default function PositionBadge({ position, size = 'md' }: Props) {
 
   return (
     <span
-      className={`inline-flex items-center font-bold tracking-wider rounded border ${colors} ${sizeClass}`}
+      className={`inline-flex items-center font-bold tracking-wider border ${colors} ${sizeClass}`}
     >
       {position}
     </span>
