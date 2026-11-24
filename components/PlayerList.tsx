@@ -79,7 +79,7 @@ export default function PlayerList({ prospects }: Props) {
       </div>
 
       {/* Player list */}
-      <div className="divide-y divide-gray-100 border border-gray-200 rounded-2xl overflow-hidden shadow-md">
+      <div className="divide-y divide-gray-100 border border-gray-200 overflow-hidden shadow-md">
         {sorted.length === 0 && (
           <div className="py-20 text-center text-gray-400 text-base">
             No prospects added yet.
