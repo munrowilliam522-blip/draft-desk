@@ -40,7 +40,7 @@ export default function MeasurementsGrid({ prospect }: Props) {
   return (
     <div>
       <h2 className="section-label mb-4">Measurements &amp; Combine</h2>
-      <div className="grid grid-cols-2 gap-px bg-gray-200 rounded-lg overflow-hidden border border-gray-200">
+      <div className="grid grid-cols-2 gap-px bg-gray-200 overflow-hidden border border-gray-200">
         {measurements.map((m) => (
           <div key={m.label} className="bg-white px-4 py-3 flex flex-col gap-0.5">
             <span className="text-xs text-gray-400 font-medium">{m.label}</span>

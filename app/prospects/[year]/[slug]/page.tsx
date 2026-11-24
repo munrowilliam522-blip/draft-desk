@@ -64,7 +64,7 @@ export default async function PlayerPage({ params }: Props) {
           <div className="flex flex-col sm:flex-row gap-6 sm:items-start">
             {/* Avatar */}
             {prospect.imageUrl ? (
-              <div className="relative w-24 h-36 shrink-0 rounded-xl overflow-hidden border-2 border-gray-200 bg-gray-100">
+              <div className="relative w-24 h-36 shrink-0 rounded-xl overflow-hidden border-4 border-gray-300 bg-gray-100">
                 <Image
                   src={prospect.imageUrl}
                   alt={prospect.name}
@@ -74,7 +74,7 @@ export default async function PlayerPage({ params }: Props) {
                 />
               </div>
             ) : (
-              <div className="flex h-28 w-20 shrink-0 items-center justify-center rounded-xl bg-gray-100 border-2 border-gray-200">
+              <div className="flex h-28 w-20 shrink-0 items-center justify-center rounded-xl bg-gray-100 border-4 border-gray-300">
                 <User size={36} className="text-gray-300" strokeWidth={1} />
               </div>
             )}
@@ -87,12 +87,12 @@ export default async function PlayerPage({ params }: Props) {
                   {year} NFL Draft
                 </span>
                 {prospect.rank && (
-                  <span className="badge bg-gray-100 text-gray-600 border border-gray-300">
+                  <span className="inline-flex items-center px-2 py-0.5 text-xs font-semibold tracking-wide bg-gray-100 text-gray-600 border border-gray-300">
                     #{prospect.rank} Overall
                   </span>
                 )}
                 {prospect.positionalRank && (
-                  <span className="badge bg-gray-100 text-gray-500 border border-gray-200">
+                  <span className="inline-flex items-center px-2 py-0.5 text-xs font-semibold tracking-wide bg-gray-100 text-gray-500 border border-gray-200">
                     #{prospect.positionalRank} {prospect.position}
                   </span>
                 )}
@@ -125,7 +125,7 @@ export default async function PlayerPage({ params }: Props) {
             </div>
 
             {/* Grade box */}
-            <div className="flex flex-col items-center justify-center border-2 border-maroon-200 bg-maroon-50 rounded-xl px-6 py-4 shrink-0">
+            <div className="flex flex-col items-center justify-center border-2 border-maroon-200 bg-maroon-50 px-6 py-4 shrink-0">
               <span className="section-label mb-2">Draft Grade</span>
               <GradeDisplay grade={prospect.grade} size="lg" showLabel />
             </div>
@@ -165,7 +165,7 @@ export default async function PlayerPage({ params }: Props) {
             <MeasurementsGrid prospect={prospect} />
 
             {/* Back to board */}
-            <div className="border border-gray-200 rounded-lg p-4">
+            <div className="border border-gray-200 p-4">
               <p className="text-xs text-gray-400 mb-3 font-medium uppercase tracking-wide">
                 Back to Big Board
               </p>
